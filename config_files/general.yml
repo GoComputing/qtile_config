@@ -1,0 +1,8 @@
+keys:
+  mod_key: mod4
+
+new_windows:
+  terminal: None
+
+screen:
+  background_image: ~/Images/Backgrounds/background.jpg

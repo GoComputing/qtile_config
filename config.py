@@ -1,36 +1,56 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
-mod = "mod4"
-terminal = guess_terminal()
+import yaml
+import os
+
+
+# TODO: move these configuration into separate src files
+# TODO: create a function to set these module variables from any file
+# TODO: change theme of GTK/Qt
+# TODO: create an interface to do Autostart/launch daemons (like Dunst)
+# TODO: create a configuration file for key bindings
+
+
+def load_yaml(path):
+
+    with open(path, 'r') as f:
+        data = yaml.safe_load(f)
+
+    return data
+
+
+def load_configs(configs_dir):
+
+    filenames = [
+        'general'
+    ]
+
+    configs = {
+        name: load_yaml(os.path.join(configs_dir, f'{name}.yml'))
+        for name in filenames
+    }
+
+    return configs
+
+
+# Load configuration from a default folder (config_files inside this project)
+configs_dir = os.path.join(os.path.dirname(__file__), 'config_files')
+configs = load_configs(configs_dir)
+
+
+
+
+
+
+
+mod = configs['general']['keys']['mod_key']
+terminal = guess_terminal(configs['general']['new_windows']['terminal'])
+
+
+
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -173,7 +193,7 @@ screens = [
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
         # x11_drag_polling_rate = 60,
-        wallpaper='~/Images/Backgrounds/background.jpg',
+        wallpaper=configs['general']['screen']['background_image'],
         wallpaper_mode='stretch'
     ),
 ]

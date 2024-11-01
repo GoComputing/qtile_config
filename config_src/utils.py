@@ -13,7 +13,8 @@ def load_yaml(path):
 def load_configs(configs_dir):
 
     filenames = [
-        'general'
+        'general',
+        'keybindings',
     ]
 
     configs = {

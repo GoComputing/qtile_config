@@ -1,0 +1,105 @@
+# A list of available commands that can be bound to keys can be found
+# at https://docs.qtile.org/en/latest/manual/config/lazy.html
+
+shortcuts:
+
+  tags:
+    switch:
+      keys: 'M-'
+      desc: 'Switch to group {}'
+    switch_move:
+      keys: 'M-S-'
+      desc: 'Switch to & move focused window to group {}'
+  
+  ungrouped:
+
+    # Switch between windows
+    - keys: 'M-h'
+      cmd: 'layout.left'
+      desc: 'Move focus to left'
+    - keys: 'M-l'
+      cmd: 'layout.right'
+      desc: 'Move focus to right'
+    - keys: 'M-j'
+      cmd: 'layout.down'
+      desc: 'Move focus down'
+    - keys: 'M-k'
+      cmd: 'layout.up'
+      desc: 'Move focus up'
+    - keys: 'M-space'
+      cmd: 'layout.next'
+      desc: 'Move window focus to other window'
+
+    # Move windows between left/right columns or move up/down in current stack.
+    # Moving out of range in Columns layout will create new column.
+    - keys: 'M-S-h'
+      cmd: 'layout.shuffle_left'
+      desc: 'Move window to the left'
+    - keys: 'M-S-l'
+      cmd: 'layout.shuffle_right'
+      desc: 'Move window to the right'
+    - keys: 'M-S-j'
+      cmd: 'layout.shuffle_down'
+      desc: 'Move window down'
+    - keys: 'M-S-k'
+      cmd: 'layout.shuffle_up'
+      desc: 'Move window up'
+
+    # Grow windows. If current window is on the edge of screen and direction
+    # will be to screen edge - window would shrink.
+    - keys: 'M-C-h'
+      cmd: 'layout.grow_left'
+      desc: 'Grow window to the left'
+    - keys: 'M-C-l'
+      cmd: 'layout.grow_right'
+      desc: 'Grow window to the right'
+    - keys: 'M-C-j'
+      cmd: 'layout.grow_down'
+      desc: 'Grow window down'
+    - keys: 'M-C-k'
+      cmd: 'layout.grow_up'
+      desc: 'Grow window up'
+    - keys: 'M-n'
+      cmd: 'layout.normalize'
+      desc: 'Reset all window sizes'
+
+    # Toggle between split and unsplit sides of stack.
+    # Split = all windows displayed
+    # Unsplit = 1 window displayed, like Max layout, but still with
+    # multiple stack panes
+    - keys: 'M-S-Return'
+      cmd: 'layout.toggle_split'
+      desc: 'Toggle between split and unsplit sides of stack'
+    - keys: 'M-Return'
+      cmd: 'spawn'
+      desc: 'Launch terminal'
+      params:
+        - kitty
+
+    # Toggle between different layouts as defined below
+    - keys: 'M-Tab'
+      cmd: 'next_layout'
+      desc: 'Toggle between layouts'
+    - keys: 'M-w'
+      cmd: 'window.kill'
+      desc: 'Kill focused window'
+    - keys: 'M-f'
+      cmd: 'window.toggle_fullscreen'
+      desc: 'Toggle fullscreen on the focused window'
+    - keys: 'M-t'
+      cmd: 'window.toggle_floating'
+      desc: 'Toggle floating on the focused window'
+
+    # Qtile
+    - keys: 'M-C-r'
+      cmd: 'reload_config'
+      desc: 'Reload the config'
+    - keys: 'M-C-q'
+      cmd: 'shutdown'
+      desc: 'Shutdown Qtile'
+    - keys: 'M-r'
+      cmd: 'spawncmd'
+      desc: 'Spawn a command using a prompt widget'
+
+mouse:
+      
